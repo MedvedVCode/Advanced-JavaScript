@@ -1,0 +1,132 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+details {
+  font-size: 18px;
+  line-height: 24px;
+}
+
+button {
+  padding: 0 20px;
+  background: none;
+  border: 1px solid;
+  font-size: 16px;
+  line-height: 40px;
+  width: 161px;
+  cursor: pointer;
+}
+button:hover {
+  background-color: lightslategray;
+  color: white;
+  box-shadow: 5px 5px 3px rgba(119, 136, 153, 0.3);
+}
+button:active {
+  background: lightsteelblue;
+  box-shadow: none;
+}
+
+input,
+textarea {
+  font-size: 16px;
+  padding: 0 20px;
+  line-height: 40px;
+}
+
+.body {
+  padding: 20px;
+}
+
+.card {
+  padding: 40px;
+  border: 1px solid lightslategrey;
+}
+.card__title {
+  text-align: center;
+}
+
+.add-product {
+  margin-top: 15px;
+  background-color: lightsteelblue;
+  padding: 15px 40px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  gap: 15px;
+  box-shadow: 5px 5px 3px rgba(176, 196, 222, 0.3);
+}
+.add-product__input {
+  width: 33%;
+}
+
+.product__details {
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+}
+.product__wrp {
+  border: 1px solid lightslategrey;
+  border-radius: 10px;
+  margin-top: 15px;
+  padding: 15px;
+}
+.product__text {
+  cursor: pointer;
+  width: 66%;
+  text-transform: uppercase;
+  line-height: 40px;
+  padding-left: 10px;
+}
+.product__text:hover {
+  background-color: lightsteelblue;
+  border-radius: 5px;
+}
+.product__delete {
+  margin-left: auto;
+  margin-right: 10px;
+}
+
+.review {
+  display: flex;
+  align-items: start;
+  border: 1px solid lightsteelblue;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+.review__list {
+  margin-bottom: 20px;
+}
+.review__text {
+  width: 66%;
+}
+.review__wrp {
+  margin-top: 15px;
+}
+.review__delete {
+  margin-left: auto;
+}
+.review__new {
+  display: flex;
+  align-items: start;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 10px;
+}
+.review__new-text {
+  width: 66%;
+  height: 94px;
+  resize: none;
+  font-family: Arial, san-serif;
+  line-height: 24px;
+  padding: 10px 15px;
+}
+.review__new-btns {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-left: auto;
+  margin-right: 10px;
+  gap: 10px;
+}/*# sourceMappingURL=style.css.map */

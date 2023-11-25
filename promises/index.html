@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ru">
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0"
+		/>
+		<title>Отзывы на продукты</title>
+		<script
+			src="script.js"
+			defer
+		></script>
+		<link
+			rel="stylesheet"
+			href="css/style.css"
+		/>
+	</head>
+	<body class="body">
+		<section class="card">
+			<h1 class="card__title">Отзывы на товары</h1>
+			<form class="add-product">
+				<input
+					type="text"
+					class="add-product__input"
+					placeholder="Введите название товара"
+				/>
+				<button>Добавить товар</button>
+			</form>
+			<article class="product">
+				<details class="product__wrp">
+					<summary class="product__details">
+						<span class="product__text">Товар с ID</span>
+						<button class="product__delete">Удалить товар</button>
+					</summary>
+					<div class="review__wrp">
+						<ul class="review__list">
+							<li class="review">
+								<span class="review__text"> Отзыв на товар 1 </span>
+								<button class="review__delete">Удалить отзыв</button>
+							</li>
+						</ul>
+						<form class="review__new">
+							<textarea
+								class="review__new-text"
+								type="text"
+								placeholder="Введите текст отзыва"
+							></textarea>
+							<div class="review__new-btns">
+								<button class="review__new-add">Добавить отзыв</button>
+								<button
+									class="review__new-clear"
+									type="reset"
+								>
+									Очистить поле
+								</button>
+							</div>
+						</form>
+					</div>
+				</details>
+			</article>
+		</section>
+	</body>
+</html>
