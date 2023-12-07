@@ -1,26 +1,53 @@
 const LOCAL_KEY = 'schedules';
 let schedules = [];
+const addBtnStatus = {
+	maxParticipants: 'Нет мест',
+	alreadySignUp: 'Вы записаны :-)',
+	signUp: 'Записаться на занятие',
+};
 
-//функция проверки значений span
+//функция проверки значений span и блокирование кнопок
 checkDisabled = (currentEl) => {
-	const maxItem = currentEl
-		.closest('.schedule-item')
-		.querySelector('.schedule-max__item');
-	const addBtn = currentEl
-		.closest('.schedule-item')
-		.querySelector('.schedule-write');
-	const removeBtn = currentEl
-		.closest('.schedule-item')
-		.querySelector('.schedule-cancel');
-	if (Number(maxItem.textContent) <= Number(currentEl.textContent)) {
-		addBtn.setAttribute('disabled', 'true');
+	const scheduleEl = currentEl.closest('.schedule-item');
+
+	//если поле существует, то берем значение
+	const isSignUp = schedules.find(
+		(schedule) => schedule.id === Number(scheduleEl.id)
+	)?.isSignUpClass;
+
+	const maxParticipants = Number(
+		scheduleEl.querySelector('.schedule-max__item').textContent
+	);
+	const addBtn = scheduleEl.querySelector('.schedule-write');
+	const removeBtn = scheduleEl.querySelector('.schedule-cancel');
+
+	console.log('ID = ', scheduleEl.id, '\n isSignUpClass = ', isSignUp);
+	if (maxParticipants <= Number(currentEl.textContent)) {
+		addBtn.disabled = 'true';
+		addBtn.textContent = addBtnStatus.maxParticipants;
+		if (isSignUp) {
+			if (removeBtn.classList.contains('hidden')) {
+				removeBtn.classList.remove('hidden');
+			}
+		} else {
+			if (!removeBtn.classList.contains('hidden')) {
+				removeBtn.classList.add('hidden');
+			}
+		}
 	} else {
-		addBtn.removeAttribute('disabled');
-	}
-	if (Number(currentEl.textContent) <= 0) {
-		removeBtn.setAttribute('disabled', 'true');
-	} else {
-		removeBtn.removeAttribute('disabled');
+		if (isSignUp) {
+			addBtn.disabled = 'true';
+			addBtn.textContent = addBtnStatus.alreadySignUp;
+			if (removeBtn.classList.contains('hidden')) {
+				removeBtn.classList.remove('hidden');
+			}
+		} else {
+			if (!removeBtn.classList.contains('hidden')) {
+				removeBtn.classList.add('hidden');
+			}
+			addBtn.textContent = addBtnStatus.signUp;
+			addBtn.removeAttribute('disabled');
+		}
 	}
 };
 
@@ -33,7 +60,7 @@ let observer = new MutationObserver((mutationRecords) => {
 const scheduleUl = document.querySelector('.schedule');
 const resetBtn = document.querySelector('.reset');
 
-// обработчик кнопки сбросить все, удаляем localStorage, перезагружаем страницу
+// обработчик кнопки сбросить все, удаляем schedules из localStorage, перезагружаем страницу
 resetBtn.addEventListener('click', () => {
 	if (localStorage.getItem(LOCAL_KEY)) {
 		localStorage.removeItem(LOCAL_KEY);
@@ -41,6 +68,7 @@ resetBtn.addEventListener('click', () => {
 	location.reload();
 });
 
+//добавление занятия в список занятий в DOM
 appendLiToUl = (schedule) => {
 	//создаем блок li
 	const scheduleItemLi = document.createElement('li');
@@ -50,7 +78,7 @@ appendLiToUl = (schedule) => {
 
 	//создаем все поля, кроме кнопок добавить/удалить участников
 	const [start, , finish] = schedule.time.split(' ');
-	scheduleItemLi.innerHTML = `<h2 class="schedule-title">${schedule.name}</h2>
+	const scheduleText = `<h2 class="schedule-title">${schedule.name}</h2>
 	<p class="schedule-date">
 		Время проведения: <span class="date-start">${start}</span> -
 		<span class="date-finish">${finish}</span>
@@ -61,15 +89,16 @@ appendLiToUl = (schedule) => {
 	<p class="schedule-current">
 		Записалось: <span class="schedule-current__item">${schedule.currentParticipants}</span>
 	</p>`;
+	scheduleItemLi.innerHTML = scheduleText;
 
 	// добавили div для кнопок
 	const divBtns = document.createElement('div');
 	scheduleItemLi.append(divBtns);
 
-	// кнопки и их обработчики
+	// создаем кнопки и добавляем кнопки
 	const writeBtn = document.createElement('button');
 	writeBtn.classList.add('schedule-write');
-	writeBtn.textContent = 'Записаться на занятие';
+	writeBtn.textContent = addBtnStatus.signUp;
 
 	const cancelBtn = document.createElement('button');
 	cancelBtn.classList.add('schedule-cancel');
@@ -97,10 +126,10 @@ appendLiToUl = (schedule) => {
 		currentParticipants.textContent =
 			Number(currentParticipants.textContent) + 1;
 		const id = Number(e.target.closest('.schedule-item').id);
-		console.log(id);
 		schedules.find((item) => item.id === id).currentParticipants = Number(
 			currentParticipants.textContent
 		);
+		schedules.find((item) => item.id === id).isSignUpClass = true;
 		localStorage.setItem(LOCAL_KEY, JSON.stringify(schedules));
 	});
 
@@ -113,10 +142,10 @@ appendLiToUl = (schedule) => {
 			Number(currentParticipants.textContent) - 1;
 
 		const id = Number(e.target.closest('.schedule-item').id);
-		console.log(id);
 		schedules.find((item) => item.id === id).currentParticipants = Number(
 			currentParticipants.textContent
 		);
+		schedules.find((item) => item.id === id).isSignUpClass = false;
 		localStorage.setItem(LOCAL_KEY, JSON.stringify(schedules));
 	});
 };

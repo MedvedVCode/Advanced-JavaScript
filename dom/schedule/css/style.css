@@ -37,6 +37,10 @@ button:active {
   color: tomato;
 }
 
+.hidden {
+  visibility: hidden;
+}
+
 .schedule {
   margin-top: 15px;
   padding: 20px;
