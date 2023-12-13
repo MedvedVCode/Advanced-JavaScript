@@ -1,0 +1,75 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+button {
+  padding: 10px;
+  font-size: 2.5rem;
+  background-color: transparent;
+  color: tomato;
+  border: none;
+  transition: all 0.2s ease-in;
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  top: calc(50% - 25px);
+}
+button:hover {
+  transform: scale(1.3);
+  color: white;
+}
+button:active {
+  transform: scale(1.1);
+}
+
+.slider {
+  position: relative;
+  width: 600px;
+  height: 400px;
+  margin: 60px auto 0;
+  overflow: hidden;
+}
+.slider-line {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+.slider-img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.btn-prev {
+  left: 10px;
+}
+.btn-next {
+  right: 10px;
+}
+
+.dots {
+  margin-top: 30px;
+  display: flex;
+  list-style-type: none;
+  gap: 20px;
+  justify-content: center;
+  width: 100%;
+}
+.dots-item {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  border: 1px solid tomato;
+  color: tomato;
+  cursor: pointer;
+  transition: all 0.2s ease-in;
+}
+.dots-item:hover {
+  background-color: rgba(255, 99, 71, 0.4);
+  border: 1px solid transparent;
+}
+
+.active {
+  background-color: tomato;
+}/*# sourceMappingURL=style.css.map */
