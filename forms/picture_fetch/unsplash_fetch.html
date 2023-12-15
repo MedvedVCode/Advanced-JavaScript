@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ru">
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0"
+		/>
+		<title>Unsplash загрузка картинок</title>
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+			integrity="Хрюю"
+		/>
+		<link
+			rel="stylesheet"
+			href="./css/style.css"
+		/>
+		<script
+			src="unsplash_fetch.js"
+			defer
+		></script>
+	</head>
+	<body>
+		<button class="prev">&lt;</button>
+		<div class="wrapper">
+			<div class="likes">
+				<i
+					name="heart"
+					class="fa-regular fa-heart fa-beat likes-heart"
+				></i>
+				<span class="likes-count"></span>
+			</div>
+			<div class="polaroid-borders">
+				<div class="polaroid">
+					<img
+						class="polaroid-img"
+						src=""
+						alt="Картинка из unsplash"
+					/>
+				</div>
+			</div>
+			<div class="author">
+				Автор фотографии: <span class="author-name"></span>
+			</div>
+		</div>
+		<button class="next">&gt;</button>
+	</body>
+</html>
